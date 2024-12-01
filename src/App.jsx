@@ -1,11 +1,12 @@
 import React from "react";
+import {createBrowserRouter, RouterProvider, Route,createRoutesFromElements} from "react-router-dom";
+
 function App() {
-  const myName = "John";
-  console.log(myName);
-  console.log("hello");
+
+
   return (
     <div>
-      <h1> name is : {myName}</h1>
+      <h1> </h1>
     </div>
   );
 }
