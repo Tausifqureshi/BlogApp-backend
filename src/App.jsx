@@ -3,7 +3,7 @@ import {createBrowserRouter, RouterProvider, Route,createRoutesFromElements} fro
 function App() {
   return (
     <div>
-    <h1 className="text-3xl font-bold text-center bg-red-500"> App-Blog </h1>
+    <h1 className="bg-orange-500 text-center"> App-Blog </h1>
     </div>  
   );
 }
