@@ -1,9 +1,10 @@
 import React from "react";
-import {createBrowserRouter, RouterProvider, Route,createRoutesFromElements} from "react-router-dom";
+// import {createBrowserRouter, RouterProvider, Route,createRoutesFromElements} from "react-router-dom";
 function App() {
   return (
     <div>
-    <h1 className="bg-orange-500 text-center"> App-Blog </h1>
+   <h1 className="text-3xl text-orange-900">App</h1>
+
     </div>  
   );
 }
