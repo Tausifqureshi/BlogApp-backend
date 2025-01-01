@@ -14,6 +14,8 @@ export class AuthService {
     console.log("AuthService initialized with client and account");
   }
 
+
+  
   async getCurrentUser() {
     try {
      // Current user ko fetch karega
