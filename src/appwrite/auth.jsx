@@ -14,12 +14,16 @@ export class AuthService {
     console.log("AuthService initialized with client and account");
   }
 
-
   // Signup function: User ko signup karne ke liye
   async creatAccount({ email, password, name }) {
     console.log("Appwrite Service Signup::");
     try {
-     const userAccount = await this.account.create(ID,email,password,name)
+      const userAccount = await this.account.create(ID, email, password, name);
+      if (userAccount) {
+        // other function called
+      } else {
+        return userAccount;
+      }
     } catch (error) {
       console.log(error);
       throw error;
