@@ -40,8 +40,9 @@ function App() {
     console.log("useEffect called");
 
     authService
-      .getCurrentUser()
+      .login()
       .then((userData) => {
+        console.log("userData", userData);
         // if (userData) {
         //   dispatch(login({ userData }));
         // } else {
