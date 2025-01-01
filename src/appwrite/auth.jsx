@@ -1,2 +1,7 @@
 import config from "../config";
- import { Client, Account, Databases, ID } from "appwrite";
+ import { Client, Account, ID } from "appwrite";
+
+ export class AuthService {}
+
+ const authService = new AuthService();
+ export default authService;
