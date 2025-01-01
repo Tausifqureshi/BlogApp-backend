@@ -36,30 +36,38 @@ function App() {
 
   console.log(import.meta.env.VITE_APPWRITE_BUCKET_ID, "Appwrite Bucket ID");
 
-  useEffect(() => {
-    console.log("useEffect called");
+  // useEffect(() => {
+  //   console.log("useEffect called");
 
-    authService
-      .login()
-      .then((userData) => {
-        console.log("userData", userData);
-        // if (userData) {
-        //   dispatch(login({ userData }));
-        // } else {
-        //   dispatch(logout());
-        // }
-      })
-      .catch((error) => console.log("user data error", error))
-      .finally(() => setLoding(false));
-  }, []);
+  //   authService
+  //     .login()
+  //     .then((userData) => {
+  //       console.log("userData", userData);
+  //       if (userData) {
+  //         dispatch(login({ userData }));
+  //       } else {
+  //         dispatch(logout());
+  //       }
+  //     })
+  //     .catch((error) => console.log("user data error", error))
+  //     .finally(() => setLoding(false));
+  // }, []);
 
 
+  return (
+    <>
+      <h1>Appwrite Client Initialized</h1>
+      <p>Check the console for Endpoint and Project ID!</p>
+    </>
+  )
   return !loding ? (
     <>
       <h1>Appwrite Client Initialized</h1>
       <p>Check the console for Endpoint and Project ID!</p>
     </>
   ) : null;
+
+ 
 }
 
 export default App;
