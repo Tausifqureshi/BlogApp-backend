@@ -25,12 +25,24 @@ export class AuthService {
         return userAccount;
       }
     } catch (error) {
-      console.log(error);
+      console.log("Appwrite Service Signup::",error);
       throw error;
     }
   }
-  
+
+//   Login function: User ko login karne ke liye
+ async login({ email, password }) {
+    console.log("Appwrite Service Login::");
+try {
+//  return await this.account.createEmailPasswordSession(email, password);
+ return await this.account.createEmailSession(email, password); 
+
+} catch ( error) {
+    console.log("Appwrite Service Login::",error);
+    throw error;
 }
+  }
+ }
 
 const authService = new AuthService();
 export default authService;
