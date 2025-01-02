@@ -17,6 +17,27 @@ export class DatabasesService {
             this.storage = new Storage(this.client);
 
     }
+
+  //createPost function: Creates a new document in the database
+  async createPost({ title, slug, content, featuredImage, status, userId }) {
+    console.log("createPost called");
+      try {
+        const post =  await this.databases.createDocument(
+            title,
+            slug,
+            content,
+            featuredImage,
+            status,
+            userId
+        )
+        
+      } catch (error) {
+        console.log("appwrite service create post::", error);
+        
+      }
+  }
+
+
 }
 
 

@@ -20,6 +20,7 @@ export class DatabasesService {
     this.databases = new Databases(this.Client); // Initialize the Databases object with the Client instance
     this.storage = new Storage(this.Client); // Initialize the Storage object with the Client instance
   }
+  
 
   // createPost function: Creates a new document in the database
   async createPost({ title, slug, content, featuredImage, status, userId }) {
