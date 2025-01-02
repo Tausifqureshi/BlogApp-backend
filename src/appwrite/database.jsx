@@ -44,26 +44,37 @@ export class DatabasesService {
   async updatePost(slug, { title, content, featuredImage, status }) {
     console.log("updatePost function call hua");
     try {
-        return this.databases.updateDocument(
-            config.appwriteDatabaseId,
-            config.appwriteCollectionId,
-            slug,
-            {
-                title,
-                content,
-                featuredImage,
-                status,
-            }
-        )
+      return this.databases.updateDocument(
+        config.appwriteDatabaseId,
+        config.appwriteCollectionId,
+        slug,
+        {
+          title,
+          content,
+          featuredImage,
+          status,
+        }
+      );
     } catch (error) {
-        console.log("appwrite service updatePost error::", error);
-
+      console.log("appwrite service updatePost error::", error);
     }
-      
   }
 
-
-//   DeltePost function: Database me ek existing document delete karta hai
+  // DeltePost function: Database me ek existing document delete karta hai.
+  async dletePost(slug) {
+    console.log("deletePost function call hua");
+    try {
+      this.databases.deleteDocument(
+        config.appwriteDatabaseId,
+        config.appwriteCollectionId,
+        slug
+      );
+      return true;
+    } catch (error) {
+      console.log("appwrite service deletePost error::", error);
+      return false;
+    }
+  }
 }
 
 const databaseService = new DatabasesService();
