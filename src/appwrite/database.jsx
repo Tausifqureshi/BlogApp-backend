@@ -61,7 +61,7 @@ export class DatabasesService {
   }
 
   // DeltePost function: Database me ek existing document delete karta hai.
-  async dletePost(slug) {
+  async deletePost(slug) {
     console.log("deletePost function call hua");
     try {
       this.databases.deleteDocument(
@@ -75,6 +75,27 @@ export class DatabasesService {
       return false;
     }
   }
+
+  // getPosts function: Database me ek existing document fetch karta hai.
+  async getPosts (slug){
+    try {
+       return await this.databases.getDocument(
+            config.appwriteDatabaseId,
+            config.appwriteCollectionId,
+            slug,
+        )
+        
+    } catch (error) {
+        console.log("appwrite service getPosts error::", error);
+        return false;  
+    }
+  }
+
+
+  
+
+
+
 }
 
 const databaseService = new DatabasesService();
