@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 // import { login, logout } from "./features/userSlice";
 // import { authService } from "./appwrite/auth";
 import authService from "./appwrite/auth";
+import databaseService from "./appwrite/database";
 
 
 function App() {

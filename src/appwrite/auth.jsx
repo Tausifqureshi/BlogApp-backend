@@ -66,4 +66,5 @@ export class AuthService {
 }
 
 const authService = new AuthService();
+console.log("authService", authService);
 export default authService;
