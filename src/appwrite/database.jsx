@@ -83,7 +83,8 @@ export class DatabasesService {
             config.appwriteDatabaseId,
             config.appwriteCollectionId,
             slug,
-        )     
+        )       
+        
         
     } catch (error) {
         console.log("appwrite service getPosts error::", error);
