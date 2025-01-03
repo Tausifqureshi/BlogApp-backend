@@ -85,7 +85,6 @@ export class DatabasesService {
             slug,
         )       
         
-        
     } catch (error) {
         console.log("appwrite service getPosts error::", error);
         return false;  
