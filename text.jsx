@@ -20,7 +20,7 @@ export class DatabasesService {
     this.databases = new Databases(this.Client); // Initialize the Databases object with the Client instance
     this.storage = new Storage(this.Client); // Initialize the Storage object with the Client instance
   }
-  
+
 
   // createPost function: Creates a new document in the database
   async createPost({ title, slug, content, featuredImage, status, userId }) {
@@ -138,15 +138,8 @@ export class DatabasesService {
 
   // getFilePreview function: Fetches a preview of a file from Appwrite's storage
   async getFilePreview(fileId) {
-    try {
-      return await this.storage.getFilePreview(
-        config.appwriteBucketId, // Bucket ID
-        fileId // File ID to fetch preview for
-      );
-    } catch (error) {
-      console.log("appwrite service get file preview::", error); // Log any error that occurs
-      return false; // Return false to indicate failure
-    }
+   console.log("getFilePreview function call hua");
+   return this.storage.getFilePreview(config.appwriteBucketId, fileId);
   }
 }
 

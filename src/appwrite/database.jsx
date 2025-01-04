@@ -77,22 +77,72 @@ export class DatabasesService {
   }
 
   // getPosts function: Database me ek existing document fetch karta hai.
-  async getPosts (slug){ 
+  async getPosts(slug) {
+    console.log("getPosts function call hua");
     try {
-       return await this.databases.getDocument(
-            config.appwriteDatabaseId,
-            config.appwriteCollectionId,
-            slug,
-        )       
-           
+      return await this.databases.getDocument(
+        config.appwriteDatabaseId,
+        config.appwriteCollectionId,
+        slug
+      );
     } catch (error) {
-        console.log("appwrite service getPosts error::", error);
-        return false;  
+      console.log("appwrite service getPosts error::", error);
+      return false;
     }
   }
-        
-  
 
+  // getActiveStatus function: Database me ek existing document fetch karta hai.
+  async getActiveStatus() {
+    console.log("getActiveStatus function call hua");
+    try {
+      return await this.databases.listDocuments(
+        config.appwriteDatabaseId,
+        config.appwriteCollectionId,
+        [Query.equal("status", "active")]
+      );
+    } catch (error) {
+      console.log("appwrite service getActiveStatus error::", error);
+    }
+  }
+
+  // File Upload Method
+
+  // UploadFile function: Uploads a file to Appwrite's storage
+  async uploadFile(file) {
+    try {
+      return await this.storage.createFile(
+        config.appwriteBucketId,
+        ID.unique(),
+        file
+      );
+    } catch (error) {
+      console.log("appwrite service upload file::", error);
+      return false;
+    }
+  }
+
+  // DeleteFile function: Deletes a file from Appwrite's storage
+  async deleteFile(fileId) {
+    console.log("deleteFile function call hua");
+    try {
+      await this.storage.deleteFile(config.appwriteBucketId, fileId);
+      return true;
+    } catch (error) {
+      console.log("appwrite service delete file::", error);
+      return false;
+    }
+  }
+
+  //Get FilePreview function: Fetches a preview of a file from Appwrite's storage
+  async getFilePreview(fileId) {
+    console.log("getFilePreview function call hua");
+    try {
+      return await this.storage.getFilePreview(config.appwriteBucketId, fileId);
+    } catch (error) {
+      console.log("appwrite service get file preview::", error);
+      return false;
+    }
+  }
 }
 
 const databaseService = new DatabasesService();
