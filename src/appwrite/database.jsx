@@ -77,26 +77,21 @@ export class DatabasesService {
   }
 
   // getPosts function: Database me ek existing document fetch karta hai.
-  async getPosts (slug){
+  async getPosts (slug){ 
     try {
        return await this.databases.getDocument(
             config.appwriteDatabaseId,
             config.appwriteCollectionId,
             slug,
         )       
-        
+           
     } catch (error) {
         console.log("appwrite service getPosts error::", error);
         return false;  
     }
   }
-
-
-
-
-
-
-
+        
+  
 
 }
 
