@@ -1,17 +1,32 @@
+// Appwrite ke Client, Account, ID, Databases, Storage, aur Query classes import karte hain
+// Client: Appwrite server se connection banata hai
+// Account: Authentication manage karta hai
+// ID: Unique IDs generate karne ke liye
+// Databases: Database operations perform karta hai (create, update, delete, etc.)
+// Storage: Files upload aur manage karta hai
+// Query: Query functions ke liye use hota hai
 import { Client, Account, ID, Databases, Storage, Query } from "appwrite";
-import config from "../config"; // Appwrite server ka URL aur project ID ka configuration import kar rahe hain.
 
+// Config file import karte hain jo Appwrite ke endpoint aur project ID rakhta hai
+import config from "../config"; // Appwrite server ka URL aur project ID ka configuration import karte hain
+
+// DatabasesService class banate hain jo Appwrite ka database aur storage manage karega
 export class DatabasesService {
+  // Client object banate hain jo server se baat karega
   client = new Client();
+
+  // Databases aur Storage objects ko yahan define karte hain (initialize constructor me hoga)
   databases;
   storage;
 
+  // Constructor: Jab DatabasesService ka object banta hai, tab ye function chalega
   constructor() {
     console.log("DatabasesService ka constructor call hua");
-    this.client
-      .setEndpoint(config.appwigtUrl) // Appwrite server ka URL set karte hain
-      .setProject(config.appwriteProjectId); // Project ID set karte hain
 
+    // Client ka endpoint aur project ID set karte hain
+    this.client.setEndpoint(config.appwigtUrl).setProject(config.appwriteProjectId);
+
+    // Databases aur Storage objects ko initialize karte hain
     this.databases = new Databases(this.client);
     this.storage = new Storage(this.client);
   }
@@ -21,17 +36,10 @@ export class DatabasesService {
     console.log("createPost function call hua");
     try {
       const post = await this.databases.createDocument(
-        config.appwriteDatabaseId,
-        config.appwriteCollectionId,
-        slug,
-        {
-          title,
-          slug,
-          content,
-          featuredImage,
-          status,
-          userId,
-        }
+        config.appwriteDatabaseId, // Database ID
+        config.appwriteCollectionId, // Collection ID
+        slug, // Document ID
+        { title, slug, content, featuredImage, status, userId } // Document data
       );
       console.log("post", post);
       return post;
@@ -45,29 +53,24 @@ export class DatabasesService {
     console.log("updatePost function call hua");
     try {
       return this.databases.updateDocument(
-        config.appwriteDatabaseId,
-        config.appwriteCollectionId,
-        slug,
-        {
-          title,
-          content,
-          featuredImage,
-          status,
-        }
+        config.appwriteDatabaseId, // Database ID
+        config.appwriteCollectionId, // Collection ID
+        slug, // Document ID
+        { title, content, featuredImage, status } // Updated data
       );
     } catch (error) {
       console.log("appwrite service updatePost error::", error);
     }
   }
 
-  // DeltePost function: Database me ek existing document delete karta hai.
+  // deletePost function: Database me ek existing document delete karta hai
   async deletePost(slug) {
     console.log("deletePost function call hua");
     try {
       this.databases.deleteDocument(
-        config.appwriteDatabaseId,
-        config.appwriteCollectionId,
-        slug
+        config.appwriteDatabaseId, // Database ID
+        config.appwriteCollectionId, // Collection ID
+        slug // Document ID
       );
       return true;
     } catch (error) {
@@ -76,14 +79,14 @@ export class DatabasesService {
     }
   }
 
-  // getPosts function: Database me ek existing document fetch karta hai.
+  // getPosts function: Database me ek document fetch karta hai
   async getPosts(slug) {
     console.log("getPosts function call hua");
     try {
       return await this.databases.getDocument(
-        config.appwriteDatabaseId,
-        config.appwriteCollectionId,
-        slug
+        config.appwriteDatabaseId, // Database ID
+        config.appwriteCollectionId, // Collection ID
+        slug // Document ID
       );
     } catch (error) {
       console.log("appwrite service getPosts error::", error);
@@ -91,29 +94,29 @@ export class DatabasesService {
     }
   }
 
-  // getActiveStatus function: Database me ek existing document fetch karta hai.
+  // getActiveStatus function: Active status ke documents fetch karta hai
   async getActiveStatus() {
     console.log("getActiveStatus function call hua");
     try {
       return await this.databases.listDocuments(
-        config.appwriteDatabaseId,
-        config.appwriteCollectionId,
-        [Query.equal("status", "active")]
+        config.appwriteDatabaseId, // Database ID
+        config.appwriteCollectionId, // Collection ID
+        [Query.equal("status", "active")] // Query
       );
     } catch (error) {
       console.log("appwrite service getActiveStatus error::", error);
     }
   }
 
-  // File Upload Method
+  // File Upload Method: Storage ke liye functions
 
-  // UploadFile function: Uploads a file to Appwrite's storage
+  // uploadFile function: Storage me ek file upload karta hai
   async uploadFile(file) {
     try {
       return await this.storage.createFile(
-        config.appwriteBucketId,
-        ID.unique(),
-        file
+        config.appwriteBucketId, // Bucket ID
+        ID.unique(), // Unique file ID
+        file // File object
       );
     } catch (error) {
       console.log("appwrite service upload file::", error);
@@ -121,7 +124,7 @@ export class DatabasesService {
     }
   }
 
-  // DeleteFile function: Deletes a file from Appwrite's storage
+  // deleteFile function: Storage me ek file delete karta hai
   async deleteFile(fileId) {
     console.log("deleteFile function call hua");
     try {
@@ -133,7 +136,7 @@ export class DatabasesService {
     }
   }
 
-  //Get FilePreview function: Fetches a preview of a file from Appwrite's storage
+  // getFilePreview function: Storage se ek file ka preview fetch karta hai
   async getFilePreview(fileId) {
     console.log("getFilePreview function call hua");
     try {
@@ -145,6 +148,9 @@ export class DatabasesService {
   }
 }
 
+// DatabasesService ka ek instance banate hain jo globally use hoga
 const databaseService = new DatabasesService();
 console.log("databaseService", databaseService);
+
+// databaseService ko export karte hain taki ise doosri files me use kar sakein
 export default databaseService;
