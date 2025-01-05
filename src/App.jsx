@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 import { useDispatch } from "react-redux";
-// import { login, logout } from "./features/userSlice";
-// import { authService } from "./appwrite/auth";
+import { login, logout } from "./ReduxStore/authSlice";
 import authService from "./appwrite/auth";
 import databaseService from "./appwrite/database";
+import { useDispatch } from "react-redux";
 
 
 function App() {
@@ -37,22 +37,22 @@ function App() {
 
   console.log(import.meta.env.VITE_APPWRITE_BUCKET_ID, "Appwrite Bucket ID");
 
-  // useEffect(() => {
-  //   console.log("useEffect called");
+  useEffect(() => {
+    console.log("useEffect called");
 
-  //   authService
-  //     .login()
-  //     .then((userData) => {
-  //       console.log("userData", userData);
-  //       if (userData) {
-  //         dispatch(login({ userData }));
-  //       } else {
-  //         dispatch(logout());
-  //       }
-  //     })
-  //     .catch((error) => console.log("user data error", error))
-  //     .finally(() => setLoding(false));
-  // }, []);
+    authService
+      .login()
+      .then((userData) => {
+        console.log("userData", userData);
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .catch((error) => console.log("user data error", error))
+      .finally(() => setLoding(false));
+  }, []);
  
 
   return (
