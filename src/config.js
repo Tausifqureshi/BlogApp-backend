@@ -16,10 +16,10 @@ const config = {
   };
   
   // Log each environment variable
-  // console.log("Appwrite URL:", config.appwigtUrl);
-  // console.log("Appwrite Project ID:", config.appwriteProjectId);
-  // console.log("Appwrite Database ID:", config.appwriteDatabaseId);
-  // console.log("Appwrite Collection ID:", config.appwriteCollectionId);
-  // console.log("Appwrite Bucket ID:", config.appwriteBucketId);
+  console.log("Appwrite URL:", config.appwigtUrl);
+  console.log("Appwrite Project ID:", config.appwriteProjectId);
+  console.log("Appwrite Database ID:", config.appwriteDatabaseId);
+  console.log("Appwrite Collection ID:", config.appwriteCollectionId);
+  console.log("Appwrite Bucket ID:", config.appwriteBucketId);
 
   export default config;

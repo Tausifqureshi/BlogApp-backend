@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "./ReduxStore/authSlice";
 import authService from "./appwrite/auth";
 import databaseService from "./appwrite/database";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 
 function App() {
@@ -21,27 +21,23 @@ function App() {
   // console.log('Project ID:', client.config.project)
   //
   // ;
+ 
+  const dispatch = useDispatch();
+  
+  // console.log(import.meta.env.VITE_APPWRITE_URL, "Appwrite Project URL");
+  // console.log(import.meta.env.VITE_APPWRITE_PROJECT_ID, "Appwrite Project ID");
 
-  console.log(import.meta.env.VITE_APPWRITE_URL, "Appwrite Project URL");
-  console.log(import.meta.env.VITE_APPWRITE_PROJECT_ID, "Appwrite Project ID");
+  // console.log( import.meta.env.VITE_APPWRITE_DATABASE_ID, "Appwrite Database ID" );
 
-  console.log(
-    import.meta.env.VITE_APPWRITE_DATABASE_ID,
-    "Appwrite Database ID"
-  );
+  // console.log(import.meta.env.VITE_APPWRITE_COLLECTION_ID,"Appwrite Collection ID" );
 
-  console.log(
-    import.meta.env.VITE_APPWRITE_COLLECTION_ID,
-    "Appwrite Collection ID"
-  );
-
-  console.log(import.meta.env.VITE_APPWRITE_BUCKET_ID, "Appwrite Bucket ID");
+  // console.log(import.meta.env.VITE_APPWRITE_BUCKET_ID, "Appwrite Bucket ID");
 
   useEffect(() => {
     console.log("useEffect called");
 
     authService
-      .login()
+      .logout()
       .then((userData) => {
         console.log("userData", userData);
         if (userData) {
