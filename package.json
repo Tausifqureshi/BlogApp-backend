@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
     "appwrite": "^16.1.0",
     "axios": "^1.7.9",
     "html-react-parser": "^5.2.2",
