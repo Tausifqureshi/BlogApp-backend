@@ -5,8 +5,7 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "./ReduxStore/authSlice";
 import authService from "./appwrite/auth";
 import databaseService from "./appwrite/database";
-// import { useDispatch } from "react-redux";
-
+import { Header, Footer } from "./components";
 
 function App() {
   const [loding, setLoding] = useState(true);
@@ -51,17 +50,20 @@ function App() {
   }, []);
  
 
-  return (
-    <>
-      <h1>Appwrite Client Initialized</h1>
-      <p>Check the console for Endpoint and Project ID!</p>
-    </>
-  )
+  // return (
+  //   <>
+  //     <h1>Appwrite Client Initialized</h1>
+  //     <p>Check the console for Endpoint and Project ID!</p>
+  //   </>
+  // )
   return !loding ? (
-    <>
+    <div>
+    <div>
+      
+    </div>
       <h1>Appwrite Client Initialized</h1>
       <p>Check the console for Endpoint and Project ID!</p>
-    </>
+    </div> 
   ) : null;
 
  
