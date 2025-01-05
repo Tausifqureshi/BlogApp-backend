@@ -37,7 +37,7 @@ function App() {
     console.log("useEffect called");
 
     authService
-      .logout()
+      .getCurrentUser()
       .then((userData) => {
         console.log("userData", userData);
         if (userData) {
