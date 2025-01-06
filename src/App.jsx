@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-
 import { useDispatch } from "react-redux";
 import { login, logout } from "./ReduxStore/authSlice";
 import authService from "./appwrite/auth";
@@ -51,12 +50,6 @@ function App() {
   }, []);
  
 
-  // return (
-  //   <>
-  //     <h1>Appwrite Client Initialized</h1>
-  //     <p>Check the console for Endpoint and Project ID!</p>
-  //   </>
-  // )
   return !loding ? (
     <div className="min-h-screen flex flex-wrap content-between gap-11 bg-gray-400" >
     <div className="w-full-screen block">
