@@ -24,13 +24,13 @@ function App() {
  
   const dispatch = useDispatch();
 
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route>
-        <Route path="footer" element={<Footer />} />
-      </Route>
-    )
-  )
+  // const router = createBrowserRouter(
+  //   createRoutesFromElements(
+  //     <Route>
+  //       <Route path="footer" element={<Footer />} />
+  //     </Route>
+  //   )
+  // )
    
 
 
@@ -69,7 +69,7 @@ function App() {
       <p>Check the console for Endpoint and Project ID!</p>
       <Header />
       <main>
-      {/* TODO : <Outlet />  */}
+     TODO:  {/* TODO : <Outlet />  */}
       </main>
       <Footer />
       {/* <RouterProvider router={router} /> */}
