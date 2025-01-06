@@ -6,6 +6,7 @@ import authService from "./appwrite/auth";
 import databaseService from "./appwrite/database";
 import { Header, Footer } from "./components";
 import { Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route,  } from "react-router-dom";
 
 function App() {
   const [loding, setLoding] = useState(true);
@@ -22,6 +23,17 @@ function App() {
   // ;
  
   const dispatch = useDispatch();
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route>
+        <Route path="footer" element={<Footer />} />
+      </Route>
+    )
+  )
+   
+
+
   
   // console.log(import.meta.env.VITE_APPWRITE_URL, "Appwrite Project URL");
   // console.log(import.meta.env.VITE_APPWRITE_PROJECT_ID, "Appwrite Project ID");
@@ -57,9 +69,10 @@ function App() {
       <p>Check the console for Endpoint and Project ID!</p>
       <Header />
       <main>
-      TODO : {/* <Outlet />  */}
+      {/* TODO : <Outlet />  */}
       </main>
       <Footer />
+      {/* <RouterProvider router={router} /> */}
     </div>
     </div> 
   ) : null;
