@@ -11,7 +11,9 @@ function Login() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const useFor= useForm();
-  console.log("useFor", useFor);
+  console.log("useForm hook check", useFor);
+
+
   const [error, setError] = useState("");
 
   const login = async (data) => {
