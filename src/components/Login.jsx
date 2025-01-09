@@ -10,13 +10,12 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const useFor= useForm();
+  const useFor = useForm();
   console.log("useForm hook check", useFor);
 
-
   const [error, setError] = useState("");
-
   const login = async (data) => {
+    console.log("login function call hua", data);
     setError("");
     try {
       const session = await authService.login(data);
@@ -24,7 +23,7 @@ function Login() {
         const userData = await authService.getCurrentUser();
         if (userData) dispatch(authLogin(userData));
         navigate("/");
-      } 
+      }
     } catch (error) {
       setError(error.message);
     }
@@ -53,10 +52,8 @@ function Login() {
           >
             Sign Up
           </Link>
-
         </p>
 
-        
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
         <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-5">
@@ -73,6 +70,7 @@ function Login() {
                 },
               })}
             />
+
             <Input
               label="Password: "
               type="password"

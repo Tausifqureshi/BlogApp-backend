@@ -1,21 +1,11 @@
-// import React from "react";
-// import { useForm } from "react-hook-form";
-// function text() {
-
-// const useFor = useForm();
-// console.log("useFor", useFor);
-//   return <div>text</div>;
-// }
-
-// export default text;
-
 import React, { useState } from "react";
-import authService from "../appwrite/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { login } from "../store/authSlice";
-import { Button, Input, Logo } from "./index.js";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import authService from "../appwrite/auth";
+import { login } from "../ReduxStore/authSlice";
+import { Button, Input, Logo } from "./index";
+import React from "react";
 
 function Signup() {
   const navigate = useNavigate();
@@ -23,19 +13,8 @@ function Signup() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
-  const create = async (data) => {
-    setError("");
-    try {
-      const userData = await authService.createAccount(data);
-      if (userData) {
-        const userData = await authService.getCurrentUser();
-        if (userData) dispatch(login(userData));
-        navigate("/");
-      }
-    } catch (error) {
-      setError(error.message);
-    }
-  };
+  
+
 
   return (
     <div className="flex items-center justify-center">

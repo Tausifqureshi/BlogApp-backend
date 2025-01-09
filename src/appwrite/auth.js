@@ -42,7 +42,7 @@ export class AuthService {
       throw error;
     }
   }
-
+  
   // Logout function: User ko logout karne ke liye
   async logout() {
     try {
