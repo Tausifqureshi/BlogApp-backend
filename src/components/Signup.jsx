@@ -14,9 +14,13 @@ function Signup() {
   const { register, handleSubmit } = useForm();
 
   const create = async (data) => {
-    
-  }
-
+    setError("");
+    try {
+        
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center">
