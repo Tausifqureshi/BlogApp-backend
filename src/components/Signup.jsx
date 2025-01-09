@@ -16,7 +16,14 @@ function Signup() {
   const create = async (data) => {
     setError("");
     try {
-        
+        const createFirstUser = await authService.createAccount(data);
+        if (createFirstUser) {
+            const currentUser = await authService.getCurrentUser();
+            if (currentUser) {
+                dispatch(login(currentUser));
+                navigate("/");
+            }
+        }
     } catch (error) {
       setError(error.message);
     }
@@ -46,8 +53,10 @@ function Signup() {
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
+          {/* Form */}
         <form onSubmit={handleSubmit(create)}>
           <div className="space-y-5">
+          {/* Name */}
             <Input
               label="Full Name: "
               placeholder="Enter your full name"
@@ -55,6 +64,8 @@ function Signup() {
                 required: true,
               })}
             />
+
+            {/* <Email></Email> */}
             <Input
               label="Email: "
               placeholder="Enter your email"
@@ -68,6 +79,8 @@ function Signup() {
                 },
               })}
             />
+
+            {/* Password */}
             <Input
               label="Password: "
               type="password"

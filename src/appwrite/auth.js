@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   // Signup function: User ko signup karne ke liye
-  async creatAccount({ email, password, name }) {
+  async createAccount({ email, password, name }) {
     console.log("Appwrite Service Signup::");
     try {
       const userAccount = await this.account.create(ID, email, password, name);
