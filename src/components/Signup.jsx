@@ -13,7 +13,9 @@ function Signup() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
-  
+  const create = async (data) => {
+    
+  }
 
 
   return (
