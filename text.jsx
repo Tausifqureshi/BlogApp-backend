@@ -80,7 +80,7 @@ export default function PostForm({ post }) {
                 .replace(/[^a-zA-Z\d\s]+/g, "-")
                 .replace(/\s/g, "-");
 
-        return "";
+        return ""; 
     }, []);
 
     React.useEffect(() => {
