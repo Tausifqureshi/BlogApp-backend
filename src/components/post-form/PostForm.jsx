@@ -11,6 +11,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
   const user = useSelector((state) => state.auth.user);
   console.log("user Post Form Page", user);
 
+  // useForm hook
   const {register, handleSubmit, control, watch, setValue, getValues} = useForm({
     defaultValues:{
       title: post?.title ||"",
@@ -20,6 +21,32 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
 
     }
   });
+
+  // Submit function
+  const submit = async (data)=>{
+
+    // data hai phele se tu ya kaam hoga uploadfile  karne wale matlab kuch image change ya formeting karna hoga
+    if(post){ 
+     const file =  data.image[0]? databaseService.uploadFile(data.image[0]): null;
+
+    //phele se jo data hai usko delete karna hoga
+    if(file){
+      databaseService.deleteFile(post.featuredImage);
+    }
+    // Post ko update karna hoga
+    const updatedPost = await databaseService.updatePost(post.$id, {
+    ...data, // Purane data ko preserve karte hain
+    featuredImage: file ? file.$id : undefined, // featuredImage ko override k matlab---> (purani value replace kar di jayegi).
+    // 1. Agar file available hai, toh featuredImage ki value file.$id set ki jayegi.
+    // 2. Agar file available nahi hai, toh featuredImage ki value undefined ho jayegi (purani value hata di jayegi).
+    });
+    
+    if(updatedPost){
+      navigate(`/post/${updatedPost.$id}`);
+
+    }
+
+  }
 
  
   return (
