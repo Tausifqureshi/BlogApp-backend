@@ -6,9 +6,11 @@ import databaseService from "../../appwrite/database";
 import { Input, Button, Select, RTE } from "../index";
 
 function PostForm() {
-  return <div>
+  return (
+  <div>
         
-  </div>;
+  </div>
+  );
 }
 
 export default PostForm;
