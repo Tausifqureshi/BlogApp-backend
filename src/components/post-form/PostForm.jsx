@@ -7,10 +7,15 @@ import { Input, Button, Select, RTE } from "../index";
 
 function PostForm() {
   const navigate = useNavigate();
-  const {register,handleSubmit, control, watch, setValue, getValues}=useForm();
-
   const user = useSelector((state) => state.auth.user);
   console.log("user Post Form Page", user);
+  const {register,handleSubmit, control, watch, setValue, getValues} = useForm({
+    defaultValues:{
+     title: "",
+    }
+  });
+
+ 
   return (
   <div>
         
