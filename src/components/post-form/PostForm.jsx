@@ -126,7 +126,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
                           {post && (
                               <div className="w-full mb-4">
                                   <img
-                                      src={appwriteService.getFilePreview(post.featuredImage)}
+                                      src={databaseService.getFilePreview(post.featuredImage)}
                                       alt={post.title}
                                       className="rounded-lg"
                                   />
@@ -145,11 +145,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
                   </form>   
               );
  
-  return (
-  <div>
-        
-  </div>
-  );
+
 }
 
 export default PostForm;
