@@ -142,7 +142,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
                               {post ? "Update" : "Submit"}
                           </Button>
                       </div>
-                  </form>
+                  </form>   
               );
  
   return (
