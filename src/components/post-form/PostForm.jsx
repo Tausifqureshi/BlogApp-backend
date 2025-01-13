@@ -135,7 +135,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
                           <Select
                               options={["active", "inactive"]}
                               label="Status"
-                              className="mb-4"
+                              className="mb-4" 
                               {...register("status", { required: true })}
                           />
                           <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
