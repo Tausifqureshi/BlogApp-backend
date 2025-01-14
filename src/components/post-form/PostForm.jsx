@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import databaseService from "../../appwrite/database";
-import { Input, Button, Select, RTE } from "../index";
+import { Input, Button, Select, RTM } from "../index";
 
 function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka data aa jaega props ke through. us post ko ham destucture kar ke nikal re post ko data ko use kar sakein.
 
@@ -113,7 +113,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
                                   setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                               }}
                           />
-                          <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                          <RTM label="Content :" name="content" control={control} defaultValue={getValues("content")} />
                       </div>
                       <div className="w-1/3 px-2">
                           <Input

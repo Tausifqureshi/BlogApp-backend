@@ -2,7 +2,7 @@ import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
 
-function RTM({ name, control, label, defaultValue = "" }) {
+export default function RTM({ name, control, label, defaultValue = "" }) {
   return <div className="w-full">
     {label && <label className="inline-block mb-1 pl-1">{label}</label>}
     <Controller
@@ -50,4 +50,4 @@ function RTM({ name, control, label, defaultValue = "" }) {
   </div>;
 }
 
-export default RTM;
+// export default RTM;

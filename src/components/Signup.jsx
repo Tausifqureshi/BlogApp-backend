@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import authService from "../appwrite/auth";
 import { login } from "../ReduxStore/authSlice";
 import { Button, Input, Logo } from "./index";
-import React from "react";
+
 
 function Signup() {
   const navigate = useNavigate();
