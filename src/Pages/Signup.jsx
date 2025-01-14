@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; //Singup show karne ke liye hai ya component.
 import { Signup as SignupComponent } from "../components/index";
 
 function Signup() {
