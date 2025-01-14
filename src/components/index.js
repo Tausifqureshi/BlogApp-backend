@@ -11,6 +11,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import PostForm from "./post-form/PostForm";
 import PostCard from "./PostCard";
+import  ProtectedRouted from "./ProtectedRoute"
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   PostForm,
   Select,
   PostCard,
+  ProtectedRouted
 };

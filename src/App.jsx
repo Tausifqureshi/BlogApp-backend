@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+// import "./App.css";
 import { useDispatch } from "react-redux";
 import { login, logout } from "./ReduxStore/authSlice";
 import authService from "./appwrite/auth";
 import databaseService from "./appwrite/database";
 import { Header, Footer } from "./components";
 import { Outlet } from "react-router-dom";
-import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route,  } from "react-router-dom";
 
 function App() {
   const [loding, setLoding] = useState(true);
@@ -65,11 +64,11 @@ function App() {
   return !loding ? (
     <div className="min-h-screen flex flex-wrap content-between gap-11 bg-gray-400" >
     <div className="w-full-screen block">
-      <h1 className="text-3xl font-bold underline text-red-950">Appwrite Client Initialized</h1>
-      <p>Check the console for Endpoint and Project ID!</p>
+      {/* <h1 className="text-3xl font-bold underline text-red-950">Appwrite Client Initialized</h1>
+      <p>Check the console for Endpoint and Project ID!</p> */}
       <Header />
       <main>
-     TODO:  {/* TODO : <Outlet />  */}
+      <Outlet /> 
       </main>
       <Footer />
       {/* <RouterProvider router={router} /> */}
