@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import databaseService from "../../appwrite/database";
 import { Input, Button, Select, RTM } from "../index";
 
-function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka data aa jaega props ke through. us post ko ham destucture kar ke nikal re post ko data ko use kar sakein.
+function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka data aa jaega props ke through. us post ko ham destucture kar ke nikal re post ko data ko use kar sakein. 
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.user);
