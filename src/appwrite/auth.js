@@ -31,7 +31,7 @@ export class AuthService {
     }
   }
 
-  //   Login function: User ko login karne ke liye
+  //  Login function: User ko login karne ke liye
   async login({ email, password }) {
     try {
       return await this.account.createEmailPasswordSession(email, password);
