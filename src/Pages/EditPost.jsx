@@ -3,7 +3,7 @@ import { Container, PostForm } from "../components/index";
 import databaseService from "../appwrite/database";
 import { useNavigate, useParams } from "react-router-dom";
 
-function EditPost() {
+function EditPost() {  
   const [post, setPosts] = useState(null);
   const { slug } = useParams();
   const navigate = useNavigate();

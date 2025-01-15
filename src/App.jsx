@@ -62,16 +62,14 @@ function App() {
  
 
   return !loding ? (
-    <div className="min-h-screen flex flex-wrap content-between gap-11 bg-gray-400" >
-    <div className="w-full-screen block">
-      {/* <h1 className="text-3xl font-bold underline text-red-950">Appwrite Client Initialized</h1>
-      <p>Check the console for Endpoint and Project ID!</p> */}
+    <div className="min-h-screen flex flex-wrap content-between bg-gray-400" >
+    <div className="w-full block">
+  
       <Header />
       <main>
       <Outlet /> 
       </main>
       <Footer />
-      {/* <RouterProvider router={router} /> */}
     </div>
     </div> 
   ) : null;
