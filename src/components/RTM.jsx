@@ -11,6 +11,7 @@ export default function RTM({ name, control, label, defaultValue = "" }) {
     render={({field:{onChange }})=>(
         <Editor
           initialValue={defaultValue}  
+          
           init = {{
             initialValue: defaultValue,
             height: 500,
