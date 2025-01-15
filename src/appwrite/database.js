@@ -21,7 +21,7 @@ export class DatabasesService {
 
   // Constructor: Jab DatabasesService ka object banta hai, tab ye function chalega
   constructor() {
-    console.log("DatabasesService ka constructor call hua");
+    // console.log("DatabasesService ka constructor call hua");
 
     // Client ka endpoint aur project ID set karte hain
     this.client.setEndpoint(config.appwigtUrl).setProject(config.appwriteProjectId);
@@ -33,7 +33,7 @@ export class DatabasesService {
 
   // createPost function: Database me ek nayi document create karta hai
   async createPost({ title, slug, content, featuredImage, status, userId }) {
-    console.log("createPost function call hua");
+    // console.log("createPost function call hua");
     try {
       const post = await this.databases.createDocument(
         config.appwriteDatabaseId, // Database ID
@@ -50,7 +50,7 @@ export class DatabasesService {
 
   // UpdatePost function: Database me ek existing document update karta hai
   async updatePost(slug, { title, content, featuredImage, status }) {
-    console.log("updatePost function call hua");
+    // console.log("updatePost function call hua");
     try {
       return this.databases.updateDocument(
         config.appwriteDatabaseId, // Database ID
@@ -65,7 +65,7 @@ export class DatabasesService {
 
   // deletePost function: Database me ek existing document delete karta hai
   async deletePost(slug) {
-    console.log("deletePost function call hua");
+    // console.log("deletePost function call hua");
     try {
       this.databases.deleteDocument(
         config.appwriteDatabaseId, // Database ID
@@ -81,7 +81,7 @@ export class DatabasesService {
 
   // getPosts function: Database me ek document fetch karta hai
   async getPosts(slug) {
-    console.log("getPosts function call hua");
+    // console.log("getPosts function call hua");
     try {
       return await this.databases.getDocument(
         config.appwriteDatabaseId, // Database ID
@@ -96,7 +96,7 @@ export class DatabasesService {
 
   // getActiveStatus function: Active status ke documents fetch karta hai
   async getActiveStatus() {
-    console.log("getActiveStatus function call hua");
+    // console.log("getActiveStatus function call hua");
     try {
       return await this.databases.listDocuments(
         config.appwriteDatabaseId, // Database ID
@@ -126,7 +126,7 @@ export class DatabasesService {
 
   // deleteFile function: Storage me ek file delete karta hai
   async deleteFile(fileId) {
-    console.log("deleteFile function call hua");
+    // console.log("deleteFile function call hua");
     try {
       await this.storage.deleteFile(config.appwriteBucketId, fileId);
       return true;
@@ -138,7 +138,7 @@ export class DatabasesService {
 
   // getFilePreview function: Storage se ek file ka preview fetch karta hai
   async getFilePreview(fileId) {
-    console.log("getFilePreview function call hua");
+    // console.log("getFilePreview function call hua");
     try {
       return await this.storage.getFilePreview(config.appwriteBucketId, fileId);
     } catch (error) {
@@ -150,7 +150,7 @@ export class DatabasesService {
 
 // DatabasesService ka ek instance banate hain jo globally use hoga
 const databaseService = new DatabasesService();
-console.log("databaseService", databaseService);
+// console.log("databaseService", databaseService);
 
 // databaseService ko export karte hain taki ise doosri files me use kar sakein
 export default databaseService;

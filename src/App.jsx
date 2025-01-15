@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { login, logout } from "./ReduxStore/authSlice";
 import authService from "./appwrite/auth";
-import databaseService from "./appwrite/database";
+// import databaseService from "./appwrite/database";
 import { Header, Footer } from "./components";
 import { Outlet } from "react-router-dom";
 
@@ -44,12 +44,12 @@ function App() {
   // console.log(import.meta.env.VITE_APPWRITE_BUCKET_ID, "Appwrite Bucket ID");
 
   useEffect(() => {
-    console.log("useEffect called");
+    // console.log("useEffect called");
 
     authService
       .getCurrentUser()
       .then((userData) => {
-        console.log("userData", userData);
+        // console.log("userData", userData);
         if (userData) {
           dispatch(login({ userData }));
         } else {
