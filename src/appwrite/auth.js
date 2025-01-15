@@ -17,7 +17,7 @@ export class AuthService {
   // Signup function: User ko signup karne ke liye
   async createAccount({ email, password, name }) {
     try {
-      const userAccount = await this.account.create(ID, email, password, name);
+      const userAccount = await this.account.create(ID.unique(), email, password, name);
       console.log('User signed up successfully:', userAccount);
       if (userAccount) {
         // other function called

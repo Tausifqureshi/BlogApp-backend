@@ -9,7 +9,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.user);
-  console.log("user Post Form Page", user);
+  console.log("user Post Form Page", userData);
 
   // useForm hook
   const {register, handleSubmit, control, watch, setValue, getValues} = useForm({
