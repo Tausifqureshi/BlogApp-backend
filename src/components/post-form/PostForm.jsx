@@ -8,7 +8,7 @@ import { Input, Button, Select, RTM } from "../index";
 function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka data aa jaega props ke through. us post ko ham destucture kar ke nikal re post ko data ko use kar sakein. 
 
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.auth.user);
+  const userData = useSelector((state) => state.auth);
   console.log("user Post Form Page", userData);
 
   // useForm hook
@@ -54,7 +54,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
 
       // post hai tu 
       if (newPost) {
-        const fileId = file.$id;
+        const fileId = newPost.$id;
         data.featuredImage = fileId; //featuredImage ke ander fileid ko me save karna hoga.
         const createdPost = await databaseService.createPost({
           ...data,
