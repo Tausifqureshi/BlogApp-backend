@@ -18,6 +18,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
       slug: post?. $id ||"",
       content:post?. content ||  "",
       status:post?.status || "active",
+      image:post?. featuredImage || "", 
 
     }  
   });
