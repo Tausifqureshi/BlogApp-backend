@@ -138,6 +138,8 @@ export class DatabasesService {
 
   // getFilePreview function: Storage se ek file ka preview fetch karta hai
   async getFilePreview(fileId) {
+    
+
     // console.log("getFilePreview function call hua");
     try {
       return await this.storage.getFilePreview(config.appwriteBucketId, fileId);
@@ -145,7 +147,9 @@ export class DatabasesService {
       console.log("appwrite service get file preview::", error);
       return false;
     }
+    
   }
+  
 }
 
 // DatabasesService ka ek instance banate hain jo globally use hoga
