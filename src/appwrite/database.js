@@ -32,22 +32,40 @@ export class DatabasesService {
   }
 
   // createPost function: Database me ek nayi document create karta hai
-  async createPost({ title, slug, content, featuredImage, status, userId }) {
-    // console.log("createPost function call hua");
-    try {
-      const post = await this.databases.createDocument(
-        config.appwriteDatabaseId, // Database ID
-        config.appwriteCollectionId, // Collection ID
-        slug, // Document ID
-        { title, content, featuredImage, status, userId } // Document data
-      );
-      console.log("post", post);
-      return post;
-    } catch (error) {
-      console.log("appwrite service createPost error::", error);
-    }
-  }
+  // async createPost({ title, slug, content, featuredImage, status, userId }) {
+  //   // console.log("createPost function call hua");
+  //   try {
+  //     const post = await this.databases.createDocument(
+  //       config.appwriteDatabaseId, // Database ID
+  //       config.appwriteCollectionId, // Collection ID
+  //       slug, // Document ID
+  //       { title, content, featuredImage, status, userId } // Document data
+  //     );
+  //     console.log("post", post);
+  //     return post;
+  //   } catch (error) {
+  //     console.log("appwrite service createPost error::", error);
+  //   }
+  // }
 
+  async createPost({title, slug, content, featuredImage, status, userId}){
+    try {
+        return await this.databases.createDocument(
+            config.appwriteDatabaseId,
+            config.appwriteCollectionId,
+            slug,
+            {
+                title,
+                content,
+                featuredImage,
+                status,
+                userId,
+            }
+        )
+    } catch (error) {
+        console.log("Appwrite serive :: createPost :: error", error);
+    }
+}
   // UpdatePost function: Database me ek existing document update karta hai
   async updatePost(slug, { title, content, featuredImage, status }) {
     // console.log("updatePost function call hua");
