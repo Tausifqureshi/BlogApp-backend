@@ -35,7 +35,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
         content: post?.content || "",
         status: post?.status || "active",
       },
-      mode: "onChange", // Ensures validation runs on field change
+      // mode: "onChange", // Ensures validation runs on field change
     });
   // Submit function
   const submit = async (data)=>{
@@ -120,6 +120,7 @@ function PostForm({post}) { //jo bbi is form ko use kar re ga waha se hi post ka
                               placeholder="Title"
                               className="mb-4"
                               {...register("title", {
+                                minLength: { value: 3, message: "Title must be at least 3 characters" },
                                 required: "Title is required",
                                 validate: (value) => value.trim() !== "" || "Title cannot be empty or whitespace",
                                })}
