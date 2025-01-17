@@ -36,7 +36,7 @@ export default function RTM({ name, control, label, defaultValue = "" }) {
                 "code",
                 "help",
                 "wordcount",
-                "anchor",
+                "anchor", 
             ],
             toolbar:  "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
             content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"

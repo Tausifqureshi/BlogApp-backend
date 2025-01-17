@@ -39,7 +39,7 @@ export class DatabasesService {
         config.appwriteDatabaseId, // Database ID
         config.appwriteCollectionId, // Collection ID
         slug, // Document ID
-        { title, slug, content, featuredImage, status, userId } // Document data
+        { title, content, featuredImage, status, userId } // Document data
       );
       console.log("post", post);
       return post;
