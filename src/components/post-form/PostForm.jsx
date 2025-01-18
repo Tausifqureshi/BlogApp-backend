@@ -280,7 +280,7 @@ export default function PostForm({ post }) {
                 />
                 <Input
                     label="Slug :"
-                    placeholder="Slug"
+                    placeholder="Slug"    
                     className="mb-4"
                     {...register("slug", { required: true })}
                     onInput={(e) => {
