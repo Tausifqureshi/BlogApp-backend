@@ -42,7 +42,7 @@
 
 //     // data hai phele se tu ya kaam hoga uploadfile  karne wale matlab kuch image change ya formeting karna hoga
 //     if(post){ 
-//      const file =  data.image[0]? databaseService.uploadFile(data.image[0]): null;
+//      const file =  await  data.image[0]? databaseService.uploadFile(data.image[0]): null;
 
 //     //phele se jo data hai usko delete karna hoga
 //     if(file){
@@ -280,7 +280,7 @@ export default function PostForm({ post }) {
                 />
                 <Input
                     label="Slug :"
-                    placeholder="Slug"    
+                    placeholder="Slug"
                     className="mb-4"
                     {...register("slug", { required: true })}
                     onInput={(e) => {

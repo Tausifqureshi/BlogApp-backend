@@ -1,137 +1,198 @@
-import config from '../conf/conf.js';
-import { Client, ID, Databases, Storage, Query } from "appwrite";
+import React, { useCallback } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import databaseService from "../../appwrite/database";
+import { Input, Button, Select, RTM } from "../index";
 
-export class Service{
-    client = new Client();
-    databases;
-    bucket;
-    
-    constructor(){
-        this.client
-        .setEndpoint(config.appwriteUrl)
-        .setProject(config.appwriteProjectId);
-        this.databases = new Databases(this.client);
-        this.bucket = new Storage(this.client);
-    }
+function PostForm({ post }) {
+  //jo bbi is form ko use kar re ga waha se hi post ka data aa jaega props ke through. us post ko ham destucture kar ke nikal re post ko data ko use kar sakein.
 
-    async createPost({title, slug, content, featuredImage, status, userId}){
-        try {
-            return await this.databases.createDocument(
-                config.appwriteDatabaseId,
-                config.appwriteCollectionId,
-                slug,
-                {
-                    title,
-                    content,
-                    featuredImage,
-                    status,
-                    userId,
-                }
-            )
-        } catch (error) {
-            console.log("Appwrite serive :: createPost :: error", error);
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.auth);
+  console.log("user Post Form Page", userData);
+
+  // useForm hook
+  // const {register, handleSubmit, control, watch, setValue, getValues} = useForm({
+  //   defaultValues:{
+  //     title: post?.title ||"",
+  //     slug: post?. $id ||"",
+  //     content:post?. content ||  "",
+  //     status:post?.status || "active",
+  //   }
+  // });
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+    setValue,
+    getValues,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      title: post?.title || "",
+      slug: post?.$id || "",
+      content: post?.content || "",
+      status: post?.status || "active",
+    },
+    // mode: "onChange", // Ensures validation runs on field change
+  });
+  // Submit function
+  const submit = async (data) => {
+    // data hai phele se tu ya kaam hoga uploadfile  karne wale matlab kuch image change ya formeting karna hoga
+    if (post) {
+      const file = data.image[0]
+        ? databaseService.uploadFile(data.image[0])
+        : null;
+
+      //phele se jo data hai usko delete karna hoga
+      if (file) {
+        databaseService.deleteFile(post.featuredImage);
+      }
+
+      // Post ko update karna hoga
+      const updatedPost = await databaseService.updatePost(post.$id, {
+        ...data, // Purane data ko preserve karte hain
+        featuredImage: file ? file.$id : undefined, // featuredImage ko override k matlab---> (purani value replace kar di jayegi).
+        // 1. Agar file available hai, toh featuredImage ki value file.$id set ki jayegi.
+        // 2. Agar file available nahi hai, toh featuredImage ki value undefined ho jayegi (purani value hata di jayegi).
+      });
+
+      // Post ko navigate karna hoga
+      if (updatedPost) {
+        navigate(`/post/${updatedPost.$id}`);
+      }
+
+      // agar first time user aya tu post ko create karna hoga eles part me hoga ya cearte kaam.
+    } else {
+      // Post ko create karna hoga
+      const newPost = (await data.image[0])
+        ? databaseService.uploadFile(data.image[0])
+        : null;
+
+      // post hai tu
+      if (newPost) {
+        const fileId = newPost.$id;
+        data.featuredImage = fileId; //featuredImage ke ander fileid ko me save karna hoga.
+        const createdPost = await databaseService.createPost({
+          ...data,
+          userId: userData.$id, //userId ke ander user ki data set karna hoga. userId createPost se milra hai.
+        });
+
+        // Post ko navigate karna hoga
+        if (createdPost) {
+          navigate(`/post/${createdPost.$id}`);
         }
+      }
     }
+  };
 
-    async updatePost(slug, {title, content, featuredImage, status}){
-        try {
-            return await this.databases.updateDocument(
-                config.appwriteDatabaseId,
-                config.appwriteCollectionId,
-                slug,
-                {
-                    title,
-                    content,
-                    featuredImage,
-                    status,
+  // Slug transform
+  const slugTransform = useCallback((value) => {
+    //
+    if (value && typeof value === "string")
+      return value
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
+        .replace(/\s/g, "-");
 
-                }
-            )
-        } catch (error) {
-            console.log("Appwrite serive :: updatePost :: error", error);
-        }
-    }
+    return "";
+  }, []);
 
-    async deletePost(slug){
-        try {
-            await this.databases.deleteDocument(
-                config.appwriteDatabaseId,
-                config.appwriteCollectionId,
-                slug
-            
-            )
-            return true
-        } catch (error) {
-            console.log("Appwrite serive :: deletePost :: error", error);
-            return false
-        }
-    }
+  // useEffect
+  React.useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === "title") {
+        setValue("slug", slugTransform(value.title), { shouldValidate: true });
+      }
+    });
 
-    async getPost(slug){
-        try {
-            return await this.databases.getDocument(
-                config.appwriteDatabaseId,
-                config.appwriteCollectionId,
-                slug
-            
-            )
-        } catch (error) {
-            console.log("Appwrite serive :: getPost :: error", error);
-            return false
-        }
-    }
+    return () => subscription.unsubscribe();
+  }, [watch, slugTransform, setValue]);
 
-    async getPosts(queries = [Query.equal("status", "active")]){
-        try {
-            return await this.databases.listDocuments(
-                config.appwriteDatabaseId,
-                config.appwriteCollectionId,
-                queries,
-                
+  return (
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+      <div className="w-2/3 px-2">
+        <div className="mb-4">
+          <Input
+            label="Title :"
+            placeholder="Title"
+            className="mb-4"
+            {...register("title", {
+              minLength: {
+                value: 3,
+                message: "Title must be at least 3 characters",
+              },
+              required: "Title is required",
+              validate: (value) =>
+                value.trim() !== "" || "Title cannot be empty or whitespace",
+            })}
+          />
+          {errors.title && (
+            <p className="text-red-500">{errors.title.message}</p>
+          )}
+        </div>
+        <Input
+          label="Slug :"
+          placeholder="Slug"
+          className="mb-4"
+          {...register("slug", { required: true })}
+          onInput={(e) => {
+            setValue("slug", slugTransform(e.currentTarget.value), {
+              shouldValidate: true,
+            });
+          }}
+        />
+        <RTM
+          label="Content :"
+          name="content"
+          control={control}
+          defaultValue={getValues("content")}
+        />
+      </div>
+      <div className="w-1/3 px-2">
+        {/* <Input
+                              label="Featured Image :"
+                              type="file"
+                              className="mb-4"
+                              accept="image/png, image/jpg, image/jpeg, image/gif"
+                              {...register("image", { required: !post })}
+                          /> */}
 
-            )
-        } catch (error) {
-            console.log("Appwrite serive :: getPosts :: error", error);
-            return false
-        }
-    }
-
-    // file upload service
-
-    async uploadFile(file){
-        try {
-            return await this.bucket.createFile(
-                config.appwriteBucketId,
-                ID.unique(),
-                file
-            )
-        } catch (error) {
-            console.log("Appwrite serive :: uploadFile :: error", error);
-            return false
-        }
-    }
-
-    async deleteFile(fileId){
-        try {
-            await this.bucket.deleteFile(
-                config.appwriteBucketId,
-                fileId
-            )
-            return true
-        } catch (error) {
-            console.log("Appwrite serive :: deleteFile :: error", error);
-            return false
-        }
-    }
-
-    getFilePreview(fileId){
-        return this.bucket.getFilePreview(
-            config.appwriteBucketId,
-            fileId
-        )
-    }
+        <Input
+          label="Featured Image :"
+          type="file"
+          className="mb-4"
+          accept="image/png, image/jpg, image/jpeg, image/gif"
+          {...register("image", { required: !post })}
+        />
+        {post && (
+          <div className="w-full mb-4">
+            <img
+              src={databaseService.getFilePreview(post.featuredImage)}
+              alt={post.title}
+              className="rounded-lg"
+            />
+          </div>
+        )}
+        <Select
+          options={["active", "inactive"]}
+          label="Status"
+          className="mb-4"
+          {...register("status", { required: true })}
+        />
+        <Button
+          type="submit"
+          bgColor={post ? "bg-green-500" : undefined}
+          className="w-full"
+        >
+          {post ? "Update" : "Submit"}
+        </Button>
+      </div>
+    </form>
+  );
 }
 
-
-const service = new Service()
-export default service
+export default PostForm;
