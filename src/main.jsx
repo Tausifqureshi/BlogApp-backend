@@ -13,7 +13,7 @@ import EditPost from "./pages/EditPost";
 import Post from "./Pages/Post";
 import AllPosts from "./pages/AllPosts";
 
-import Text from '../Text.jsx'
+// import Text from '../Text.jsx'
 
 const router = createBrowserRouter([
   {
@@ -78,8 +78,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    {/* <App /> */}
-    <Text />
-    {/* <RouterProvider router={router} /> */}
+     <App />  
+    {/* <Text /> */}
+    <RouterProvider router={router} />
   </Provider>
 );
+    

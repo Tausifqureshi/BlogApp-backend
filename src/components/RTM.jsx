@@ -77,9 +77,9 @@ export default function RTM({name, control, label, defaultValue =""}) {
 
     <Controller
     name={name || "content"}
-    control={control}
+    control={control}  
     render={({field: {onChange}}) => (
-        <Editor
+        <Editor 
         initialValue={defaultValue}
         init={{
             initialValue: defaultValue,
