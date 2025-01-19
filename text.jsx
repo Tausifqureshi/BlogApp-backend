@@ -1,23 +1,23 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-function Text() {
+// import React from "react";
+// import { useForm } from "react-hook-form";
+// function Text() {
 
-const {register, handleSubmit} = useForm();
-const formData = useForm()
-console.log("useFor", formData);
-const submit = (data) => {
-  console.log("data", data);
-}
+// const {register, handleSubmit} = useForm();
+// const formData = useForm()
+// console.log("useFor", formData);
+// const submit = (data) => {
+//   console.log("data", data);
+// }
 
-  return <div>
-    <form action="" onSubmit={handleSubmit(submit)}>
-      <input type="text" {...register("name")} />
-      <input type="submit" />
-    </form>
-  </div>;
-}
+//   return <div>
+//     <form action="" onSubmit={handleSubmit(submit)}>
+//       <input type="text" {...register("name")} />
+//       <input type="submit" />
+//     </form>
+//   </div>;
+// }
 
-export default Text;
+// export default Text;
 
 
 
@@ -30,6 +30,88 @@ export default Text;
   <Footer />
 </div>
 </div> */}
+
+
+
+
+
+
+
+
+
+
+import React, { useState } from "react";
+
+const CategoryFilter = () => {
+  // Categories list
+  const categories = ["Technology", "Health", "Finance", "Education", "Sports"];
+
+  // Dummy data
+  const items = [
+    { id: 1, name: "React Framework", category: "Technology" },
+    { id: 2, name: "Yoga for Beginners", category: "Health" },
+    { id: 3, name: "Stock Market Basics", category: "Finance" },
+    { id: 4, name: "Online Learning Platforms", category: "Education" },
+    { id: 5, name: "Football Training", category: "Sports" },
+  ];
+
+  // State for selected categories
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  // Handle checkbox change
+  const handleCheckboxChange = (e) => {
+    const category = e.target.value
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((cat) => cat !== category) // Unselect if already selected
+        : [...prev, category] // Add to selected categories
+    );
+  };
+
+  // Filter items based on selected categories
+  const filteredItems = selectedCategories.length
+    ? items.filter((item) => selectedCategories.includes(item.category))
+    : items; // Show all if no category selected
+
+  return (
+    <div>
+      <h2>Category Filter</h2>
+
+      {/* Categories Checkboxes */}
+      <div>
+        <h3>Filter by Category:</h3>
+        {categories.map((category) => (
+          <label key={category} style={{ display: "block", marginBottom: "8px" }}>
+            <input
+              type="checkbox"
+              value={category}
+              checked={selectedCategories.includes(category)}
+              // onChange={() => handleCheckboxChange(category)}
+              onChange={handleCheckboxChange}
+            />
+            {category}
+          </label>
+        ))}
+      </div>
+
+      {/* Filtered Results */}
+      <div>
+        <h3>Filtered Items:</h3>
+        {filteredItems.length ? (
+          <ul>
+            {filteredItems.map((item) => (
+              <li key={item.id}>{item.name} ({item.category})</li>
+            ))}
+          </ul>
+        ) : (
+          <p>No items found!</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default CategoryFilter;
 
 
 
