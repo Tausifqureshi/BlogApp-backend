@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, version } from "react";
 // import "./App.css";
 import { useDispatch } from "react-redux";
 import { login, logout } from "./ReduxStore/authSlice";
@@ -63,7 +63,7 @@ function App() {
 
   return !loding ? (
     <div className="min-h-screen flex flex-wrap content-between bg-gray-400" >
-    <div className="w-full block">
+    <div className="w-full block"> version: {version}
   
       <Header />
       <main>
