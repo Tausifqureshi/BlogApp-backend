@@ -32,7 +32,7 @@ function Header() {
     },
     {
       name: "Add Post",
-      slug: "/add-post",
+      slug: "/add-postm",
       active: authStatus,
     },
   ];
