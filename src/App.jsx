@@ -60,7 +60,7 @@ function App() {
       .finally(() => setLoding(false));
   }, []);
  
-
+ 
   return !loding ? (
     <div className="min-h-screen flex flex-wrap content-between bg-gray-400" >
     <div className="w-full block"> version: {version}
@@ -74,7 +74,7 @@ function App() {
     </div> 
   ) : null;
 
- 
+  
 }
 
 export default App;
