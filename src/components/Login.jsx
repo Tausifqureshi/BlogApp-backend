@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();  
   const useFor = useForm();
   console.log("useForm hook check", useFor);
 
@@ -17,7 +17,7 @@ function Login() {
   const login = async (data) => {
     console.log("login function call hua", data);
     setError("");
-    try {
+    try {  
       const session = await authService.login(data);
       if (session) {
         const userData = await authService.getCurrentUser();

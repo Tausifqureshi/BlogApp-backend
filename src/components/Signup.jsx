@@ -6,7 +6,7 @@ import authService from "../appwrite/auth";
 import { login } from "../ReduxStore/authSlice";
 import { Button, Input, Logo } from "./index";
 
-
+  
 function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
