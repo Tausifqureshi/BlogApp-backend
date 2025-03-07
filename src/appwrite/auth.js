@@ -23,12 +23,12 @@ export class AuthService {
         // other function called
         return this.login({ email, password });
       } else {  
-        return userAccount;
+        return userAccount;  
       }
     } catch (error) {
       console.log("Appwrite Service Signup::", error);
       throw error;
-    }
+    }  
   }
 
   //  Login function: User ko login karne ke liye
